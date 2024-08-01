@@ -82,21 +82,28 @@ exports.resetPassToken = async (req, res) => {
   });
 };
 
+exports.verifyToken = async (req, res) => {
+  const { passResetToken } = req.params;
+
+  const user = await User.findOne({ passResetToken });
+
+  if (!user) {
+    return res
+      .status(404)
+      .send("Password reset token expiered!");
+  }
+
+  if (Date.parse(user.passResetTokenExp) < Date.now()) {
+    return res.status(500).send("Reset Token Expires!" );
+  }
+
+  res.status(200).send("Token Verifyed Success");
+}
 
 exports.createNewPass = async (req, res) => {
   const { passResetToken } = req.params;
   const { newPassword } = req.body;
   const user = await User.findOne({ passResetToken });
-
-  if (!user) {
-        return res
-          .status(404)
-          .send("Invalid Password reset Token");
-      }
-
-  if (Date.parse(user.passResetTokenExp) < Date.now()) {
-    return res.status(500).send("Reset Token Expires!" );
-  }
 
   if (!newPassword) {
     return res.status(400).send("Required Field new_password");
