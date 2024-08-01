@@ -1,8 +1,5 @@
-# TASK DETAILS
+# Password Reset Flow Task
 
-<div>
-  <h1>Password Reset Flow Task</h1>
-</div>
 <div>
   <h3>Task Details:</h3>
   <ol>
