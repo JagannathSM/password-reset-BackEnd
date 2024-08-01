@@ -70,8 +70,8 @@ exports.resetPassToken = async (req, res) => {
   const message = `<div style="diaplay:flex;flex-direction:column;justify-content:center;text-align: center;background-color: lightblue;border: 5px outset black;color:black">
   <div style="padding:10px;margin:5px">
   <h3 style="margin:0px">Password Reset Request</h3>
-  <p>Your Password reset token - ${passResetToken}. Click on the below link to reset your password, this link expires in 1hr.</p>
-  <a style="text-decoration:none; border:1px solid black; background-color:black;color:white;padding:4px;border-radius:5px" type="button" href="http://localhost:5173/password-reset/${passResetToken}" target="_blank">Reset Password</a>
+  <p>Your Password reset token - ${passResetToken}. Click on the below link to reset your password, this link expires in 1hr. <br>  If you did not request this, please ignore this email and your password will remain unchanged.</p>
+  <a style="text-decoration:none; border:1px solid black; background-color:black;color:white;padding:4px;border-radius:5px" type="button" href="${process.env.NETLIFY}${passResetToken}" target="_blank">Reset Password</a>
   </div>
   </div>`;
   sendPassResetEmail({
